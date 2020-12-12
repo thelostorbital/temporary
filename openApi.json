@@ -1,0 +1,179 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "OPWAIN v1",
+    "version": "1.0",
+    "description": "API for testimonial verification service, OPWAIN.",
+    "x-logo": {
+      "url": ""
+    },
+    "license": null,
+    "contact": null
+  },
+  "servers": [
+    {
+      "url": "https://api.opwain.com"
+    }
+  ],
+  "paths": {
+    "/testimonial/create": {
+      "summary": "Create a Testimonial",
+      "description": "Create",
+      "post": {
+        "requestBody": {
+          "description": "Testimonial object to be submitted.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Testimonial"
+              },
+              "example": ""
+            }
+          },
+          "required": true
+        },
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "Successfully created a testimonial",
+            "x-last-modified": 1607755112015
+          },
+          "400": {
+            "description": "Bad request",
+            "x-last-modified": 1607755131344
+          },
+          "401": {
+            "description": "Authentication Failed",
+            "x-last-modified": 1607755177422
+          }
+        },
+        "operationId": "opwain_create_testimonial",
+        "summary": "Create a Testimonial",
+        "externalDocs": {
+          "url": "https://docs.opwain.com"
+        }
+      },
+      "x-last-modified": 1607754016490
+    },
+    "/testimonial/fetch": {
+      "summary": "Fetch all Testimonials associated with an account",
+      "get": {
+        "tags": [],
+        "parameters": [
+          {
+            "deprecated": false,
+            "example": "",
+            "name": "publishableKey",
+            "description": "Publishable Key provided to the account",
+            "in": "query",
+            "required": true,
+            "allowEmptyValue": false,
+            "x-last-modified": 1607755559412
+          },
+          {
+            "deprecated": false,
+            "example": "",
+            "name": "visibility",
+            "description": "Setting it to true fetches all the testimonials whose visibility is on in user's dashboard.",
+            "in": "query",
+            "required": true,
+            "allowEmptyValue": false,
+            "x-last-modified": 1607755705718
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FetchedTestimonials"
+                },
+                "example": ""
+              }
+            },
+            "description": "Testimonials Fetched Successfully",
+            "x-last-modified": 1607756567164
+          },
+          "404": {
+            "description": "No testimonials associated to the publishable key provided.",
+            "x-last-modified": 1607756096128
+          }
+        },
+        "operationId": "opwain_fetch_testimonial",
+        "summary": "Fetches testimonials"
+      },
+      "x-last-modified": 1607754764620
+    }
+  },
+  "components": {
+    "schemas": {
+      "IllegalInputError": {
+        "required": [
+          "message",
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "code": {
+            "maximum": 400,
+            "minimum": 400,
+            "type": "integer"
+          }
+        },
+        "x-last-modified": 1607754987146
+      },
+      "Testimonial": {
+        "required": [
+          "name",
+          "email",
+          "message",
+          "secretKey",
+          "image",
+          "returnUrl"
+        ],
+        "enum": [],
+        "type": "object",
+        "example": "",
+        "x-last-modified": 1607756150903
+      },
+      "FetchedTestimonials": {
+        "required": [
+          "testimonials"
+        ],
+        "enum": [],
+        "type": "object",
+        "example": "",
+        "x-last-modified": 1607756467532
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Operation succeeded",
+        "x-last-modified": 1607754969385
+      },
+      "400": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/IllegalInputError"
+            }
+          }
+        },
+        "description": "Illegal input for operation.",
+        "x-last-modified": 1607754987146
+      },
+      "404": {
+        "description": "Entity not found.",
+        "x-last-modified": 1607754981739
+      }
+    },
+    "securitySchemes": {},
+    "parameters": {}
+  },
+  "tags": [],
+  "security": [],
+  "externalDocs": null
+}
